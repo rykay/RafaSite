@@ -1,8 +1,7 @@
-## Welcome to GitHub Pages
+## Ryan Kennedy
 
-You can use the [editor on GitHub](https://github.com/rykay/RafaSite/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+I’ve always been a believer that Rafa’s dominance at the French Open and on clay courts in general is one of the greatest achievements throughout sports history. I think telling Rafa’s story, including his quick rise to fame, and his dominance at one of the biggest tournaments and surfaces would give insight on just how insane of an athlete and competitor he is!
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
 ### Markdown
 
