@@ -33,6 +33,33 @@
 <div id="vizContainer" style="width:750px; height:750px;"></div>
 </body>
 
+
+<head>
+    <script type="text/javascript"
+            src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+    <script type="text/javascript">
+        function dominanceViz() {
+            var containerDiv = document.getElementById("viz1650410585825"),
+                url = "https://public.tableau.com/views/DominanceRating/Sheet1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link",
+                options = {
+                    hideTabs: true,
+                    hideToolbar: true,
+                    onFirstInteractive: function () {
+                        console.log("Run this code when the viz has finished loading.");
+                    }
+                };
+
+            var viz = new tableau.Viz(containerDiv, url, options);
+            // Create a viz object and embed it in the container div.
+        }
+    </script>
+</head>
+
+<body onload="dominanceViz();">
+<div id="viz1650410585825" style="width:750px; height:750px;"></div>
+</body>
+
+
 <head>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
