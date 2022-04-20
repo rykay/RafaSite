@@ -381,8 +381,15 @@
 
 </script>
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
+<head>
+    <script src="http://d3js.org/d3.v4.js"></script>
+</head>
+
 <body>
+<div id='grid-container3'>
+    <div id='grid-chart3'></div>
+</div>
+</body>
 <script>
     var margin = {top: 50, right: 50, bottom: 50, left: 50};
     var width = 750 - margin.right - margin.left,
@@ -396,7 +403,7 @@
     ];
     let features = ["Roland Garros","Australian Open","Wimbledon","US Open"];
 
-    let svg = d3.select("body").append("svg")
+    let svg = d3.select("body").append("#grid-chart3")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -484,7 +491,6 @@
     }
 
 
-    console.log(data)
 </script>
 </body>
 
