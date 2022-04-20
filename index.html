@@ -7,137 +7,6 @@
 </div>
 
 
-
-<head>
-    <script type="text/javascript"
-            src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
-    <script type="text/javascript">
-        function initViz() {
-            var containerDiv = document.getElementById("vizContainer"),
-                url = "https://public.tableau.com/views/ReturnGamesWonViz/Sheet1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link",
-                options = {
-                    hideTabs: true,
-                    hideToolbar: true,
-                    onFirstInteractive: function () {
-                        console.log("Run this code when the viz has finished loading.");
-                    }
-                };
-
-            var viz = new tableau.Viz(containerDiv, url, options);
-            // Create a viz object and embed it in the container div.
-        }
-    </script>
-</head>
-
-<body onload="initViz(), dominanceViz()">
-<div id="vizContainer" style="width:750px; height:750px;"></div>
-</body>
-
-
-
-<head>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</head>
-<body>
-<script>
-
-    // set the dimensions and margins of the graph
-    var margin = {top: 80, right: 150, bottom: 50, left: 50},
-        width = 750 - margin.left - margin.right,
-        height = 700 - margin.top - margin.bottom;
-
-    // append the svg object to the body of the page
-    var svg = d3.select("body")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-
-    //Read the data
-    d3.csv("https://raw.githubusercontent.com/rykay/RafaFrenchOpen/main/PressureFinal.csv").then(data => {
-
-        // tournament list for domain of x axis
-        let tournaments = ["Monte Carlo", "Rome", "Barcelona", "Buenos Aires", "Roland Garros", "Sao Paulo", "Madrid"]
-
-        data.forEach(function(d) {
-            d.tourney_name = d.tourney_name;
-            d.percent_won = d.percent_won;
-        });
-
-        var xScale = d3.scaleBand()
-            .range([0, width]).padding(0.4);
-        var yScale = d3.scaleLinear()
-            .range([height, 0]);
-        xScale.domain(tournaments);
-        yScale.domain([0, 100]);
-
-        //gotten from color brewer
-        var colors = ["#fee5d9",
-            "#fcae91",
-            "#fb6a4a",
-            "#de2d26",
-            "#a50f15"];
-        var sequentialScale = d3.scaleQuantize()
-            .domain([0,100])
-            .range(colors);
-
-        svg.append("text")
-            .attr("transform", "translate(100, 0)")
-            .attr("x", 50)
-            .attr("y", -30)
-            .attr("font-size", "24px")
-            .text("Percentage of Points Won Under Pressure");
-
-        //create x axis and apply xScale
-        svg.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(xScale))
-            .append("text")
-            .attr("y", height-265)
-            .attr("x", width-200)
-            .attr("stroke", "black")
-            .text("Year");
-
-        //create y axis and apply yScale
-        svg.append("g")
-            .call(d3.axisLeft(yScale).tickFormat(function(d){
-                return d + "%";
-            }).ticks(20))
-            .append("text")
-            .attr("y", 6)
-            .attr("dy", "0.71em")
-            .attr("text-anchor", "end")
-            .text("value");
-
-        //draw rects
-        svg.selectAll(".bar")
-            .data(data)
-            .enter().append("rect")
-            .attr("class", "bar")
-            .attr("x", function(d) { return xScale(d.tourney_name); })
-            .attr("y", function(d) { return yScale(d.percent_won); })
-            .attr("width", xScale.bandwidth())
-            .attr("height", function(d) { return height - yScale(d.percent_won); })
-            .attr("fill", function(d) { return sequentialScale(d.percent_won);})
-
-        var legend = d3.legendColor()
-            .labelFormat(d3.format('.2f'))
-            .title('Percent of Points')
-            .scale(sequentialScale)
-        svg.append("g")
-            .attr('class', 'legend')
-            .attr('transform', 'translate(' + (width - margin.right/4 + 62) + ',' + ((height - margin.bottom) / 45) + ')')
-            .call(legend)
-
-
-    });
-</script>
-</body>
-
 <head>
     <script src="http://d3js.org/d3.v4.js"></script>
 </head>
@@ -389,6 +258,139 @@
     drawGraph();
 
 </script>
+
+
+
+<head>
+    <script type="text/javascript"
+            src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+    <script type="text/javascript">
+        function initViz() {
+            var containerDiv = document.getElementById("vizContainer"),
+                url = "https://public.tableau.com/views/ReturnGamesWonViz/Sheet1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link",
+                options = {
+                    hideTabs: true,
+                    hideToolbar: true,
+                    onFirstInteractive: function () {
+                        console.log("Run this code when the viz has finished loading.");
+                    }
+                };
+
+            var viz = new tableau.Viz(containerDiv, url, options);
+            // Create a viz object and embed it in the container div.
+        }
+    </script>
+</head>
+
+<body onload="initViz(), dominanceViz()">
+<div id="vizContainer" style="width:750px; height:750px;"></div>
+</body>
+
+
+
+<head>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<script>
+
+    // set the dimensions and margins of the graph
+    var margin = {top: 80, right: 150, bottom: 50, left: 50},
+        width = 750 - margin.left - margin.right,
+        height = 700 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+
+    //Read the data
+    d3.csv("https://raw.githubusercontent.com/rykay/RafaFrenchOpen/main/PressureFinal.csv").then(data => {
+
+        // tournament list for domain of x axis
+        let tournaments = ["Monte Carlo", "Rome", "Barcelona", "Buenos Aires", "Roland Garros", "Sao Paulo", "Madrid"]
+
+        data.forEach(function(d) {
+            d.tourney_name = d.tourney_name;
+            d.percent_won = d.percent_won;
+        });
+
+        var xScale = d3.scaleBand()
+            .range([0, width]).padding(0.4);
+        var yScale = d3.scaleLinear()
+            .range([height, 0]);
+        xScale.domain(tournaments);
+        yScale.domain([0, 100]);
+
+        //gotten from color brewer
+        var colors = ["#fee5d9",
+            "#fcae91",
+            "#fb6a4a",
+            "#de2d26",
+            "#a50f15"];
+        var sequentialScale = d3.scaleQuantize()
+            .domain([0,100])
+            .range(colors);
+
+        svg.append("text")
+            .attr("transform", "translate(100, 0)")
+            .attr("x", 50)
+            .attr("y", -30)
+            .attr("font-size", "24px")
+            .text("Percentage of Points Won Under Pressure");
+
+        //create x axis and apply xScale
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(xScale))
+            .append("text")
+            .attr("y", height-265)
+            .attr("x", width-200)
+            .attr("stroke", "black")
+            .text("Year");
+
+        //create y axis and apply yScale
+        svg.append("g")
+            .call(d3.axisLeft(yScale).tickFormat(function(d){
+                return d + "%";
+            }).ticks(20))
+            .append("text")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "end")
+            .text("value");
+
+        //draw rects
+        svg.selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function(d) { return xScale(d.tourney_name); })
+            .attr("y", function(d) { return yScale(d.percent_won); })
+            .attr("width", xScale.bandwidth())
+            .attr("height", function(d) { return height - yScale(d.percent_won); })
+            .attr("fill", function(d) { return sequentialScale(d.percent_won);})
+
+        var legend = d3.legendColor()
+            .labelFormat(d3.format('.2f'))
+            .title('Percent of Points')
+            .scale(sequentialScale)
+        svg.append("g")
+            .attr('class', 'legend')
+            .attr('transform', 'translate(' + (width - margin.right/4 + 62) + ',' + ((height - margin.bottom) / 45) + ')')
+            .call(legend)
+
+
+    });
+</script>
+</body>
+
 
 <head>
     <script type="text/javascript"
