@@ -382,14 +382,10 @@
 </script>
 
 <head>
-    <script src="http://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-
 <body>
-<div id='grid-container3'>
-    <div id='grid-chart3'></div>
-</div>
-</body>
 <script>
     var margin = {top: 50, right: 50, bottom: 50, left: 50};
     var width = 750 - margin.right - margin.left,
@@ -403,7 +399,7 @@
     ];
     let features = ["Roland Garros","Australian Open","Wimbledon","US Open"];
 
-    let svg = d3.select("body").append("#grid-chart3")
+    let svg = d3.select("body").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
